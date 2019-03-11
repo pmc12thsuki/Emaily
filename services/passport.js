@@ -32,6 +32,7 @@ passport.use(new GoogleStrategy({
   clientID: keys.googleClientID,
   clientSecret: keys.googleClientSecret,
   callbackURL: '/auth/google/callback', // the callback url after user grant premission
+  proxy: true, // let google to trust heroku's proxy
 }, (accessToken, refreshToken, profile, done) => {
   // this is the only place we can get users profile
   // accessToken，之後該應用程式可以拿 accessToken 向 google 證明該用戶有給過 premission，如此就不用每次用戶登入就要重新 grant premission，我們目前不會用到，但在某些應用程式中常用
