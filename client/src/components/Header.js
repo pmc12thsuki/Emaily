@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import Payments from './Payments';
 // eslint-disable-next-line react/prefer-stateless-function
 class Header extends Component {
   renderContent() {
@@ -14,7 +14,14 @@ class Header extends Component {
         status = <li><a href="/auth/google">Login With Google</a></li>;
         break;
       default:
-        status = <li><a href="/api/logout">Logout</a></li>;
+        status = [
+          <li key="0"><Payments /></li>,
+          <li key="1" style={{ margin: '0 10px' }}>
+            Credits:
+            {this.props.auth.credits}
+          </li>,
+          <li key="2"><a href="/api/logout">Logout</a></li>,
+        ];
     }
     return status;
   }

@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
 const keys = require('./config/keys');
 require('./models/User'); // 要先宣告 Schema, 之後才能使用。因為 passport 中會對 schema 操作，因此 pasport 一定要放在這行之後
@@ -14,6 +15,10 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// config app to use bodyparser to help parse incoming request to JSON format
+app.use(bodyParser.json());
+
 
 // tell express how to handle cookie
 app.use(
@@ -27,6 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoute')(app); // 將 app 當作參數傳入 route 中，才能設定需要的 route，相等於以下的 code 但更簡潔
+require('./routes/billingRoutes')(app);
 /*
 const authRoute = require('./routes/authRoutes');
 authRoute(app);
