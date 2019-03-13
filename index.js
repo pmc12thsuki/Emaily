@@ -9,9 +9,10 @@ const path = require('path');
 
 const keys = require('./config/keys');
 require('./models/User'); // 要先宣告 Schema, 之後才能使用。因為 passport 中會對 schema 操作，因此 pasport 一定要放在這行之後
+require('./models/Survey');
 require('./services/passport'); // 因為 passport 中沒有 export 的東西，所以只需要單純 require 這段 code 就好
 
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV || 'development';
 
 mongoose.connect(keys.mongoURI);
 
@@ -33,11 +34,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/authRoute')(app); // 將 app 當作參數傳入 route 中，才能設定需要的 route，相等於以下的 code 但更簡潔
-require('./routes/billingRoutes')(app);
+require('./routes')(app); // 將 app 當作參數傳入 route 中，才能設定需要的 route，相等於以下的 code 但更簡潔
 /*
-const authRoute = require('./routes/authRoutes');
-authRoute(app);
+const route = require('./routes/index');
+route(app);
 */
 
 if (env === 'production') {

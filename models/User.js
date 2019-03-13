@@ -12,4 +12,4 @@ const userSchema = new Schema({
 
 // 實際創造該 collection
 // 第一個參數是該 collection 的名字，第二個參數是該 collection 的 schema
-mongoose.model('user', userSchema);
+mongoose.model('users', userSchema);

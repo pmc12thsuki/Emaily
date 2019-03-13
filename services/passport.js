@@ -6,7 +6,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config/keys');
 
 // 從 mongoose 中找出名字為 user 的 collection
-const User = mongoose.model('user');
+const User = mongoose.model('users');
 
 // 這個 function 定義如何將 user 中獨特的資訊 (id) 加密，並將其設在使用者的 cookie 上 (或 session, JWT 等)
 passport.serializeUser((user, done) => {
