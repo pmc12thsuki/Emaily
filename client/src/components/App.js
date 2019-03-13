@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
 import SurveyThanks from './Thanks';
+import SurveyNew from './surveys/SurveyNew';
 
-const Dashboard = () => <h2> Dashboard </h2>;
-const SurveyNew = () => <h2> SurveyNew </h2>;
 
 class App extends Component {
   componentDidMount() {
@@ -23,19 +23,17 @@ class App extends Component {
   // if we only want the exactly same url, then add exact = true in Route state
   // in JSX, exact={true} is equal to exact
     return (
-      <div className="container">
-        <BrowserRouter>
-          <div>
-            <Header />
-            {/* header will always be displayed no matter what because it's not tied to any specific path configuration */ }
+      <BrowserRouter>
+        <div className="container">
+          <Header />
+          {/* header will always be displayed no matter what because it's not tied to any specific path configuration */ }
 
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/surveys" component={Dashboard} />
-            <Route path="/surveys/new" component={SurveyNew} />
-            <Route path="/surveys/thanks" component={SurveyThanks} />
-          </div>
-        </BrowserRouter>
-      </div>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/surveys" component={Dashboard} />
+          <Route path="/surveys/new" component={SurveyNew} />
+          <Route path="/surveys/thanks" component={SurveyThanks} />
+        </div>
+      </BrowserRouter>
     );
   }
 }
