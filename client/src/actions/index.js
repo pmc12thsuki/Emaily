@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER } from './types';
+import { FETCH_USER, FETCH_SURVEYS } from './types';
 
 // to use reduxThunk, instead of return a action object, we return a function
 // if reduxThunk sees that we return a function instead of a normal action, redunThunk will automatically call this function and pass in dispatch function as an argument
@@ -29,4 +29,12 @@ export const submitSurvey = (values, history) => async(dispatch) => {
     type: FETCH_USER,
     payload: res.data,
   })
+}
+
+export const fetchSurveys = () => async(dispatch) => {
+  const res = await axios.get('/api/surveys');
+  dispatch({
+    type: FETCH_SURVEYS,
+    payload: res.data
+  });
 }

@@ -13,6 +13,15 @@ const Survey = mongoose.model('surveys');
 // 1. check user is login
 // 2. check user has enough credit to create surveys
 module.exports = (app) => {
+  // user query for surveys list
+  app.get('/api/surveys', requireLogin, async (req, res) => {
+    const surveys = await Survey.find({ _user: req.user.id })
+      .select({ recipients: false }) // return a survey instance but exclude the recipients field
+      .sort({ dateSent: -1, lastResponded: -1 });
+    res.send(surveys);
+  });
+
+
   // user create a survey
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
     // use middleware to first check if user is login, then check if user has enough credits
@@ -47,6 +56,7 @@ module.exports = (app) => {
     }
   });
 
+  // sendgrid hit our webhooks
   app.post('/api/surveys/webhooks', (req, res) => {
     const p = new Path('/api/surveys/:surveyId/:choice'); // 我們想要從路徑中 parse 出來的樣式
     _.chain(req.body) // 使用 lodash 的 chain 功能，把 map, compact, uniqBy 串起來，最後再用 value 回傳處理好的值
@@ -96,6 +106,7 @@ module.exports = (app) => {
     */
   });
 
+  // recipients click the email link
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.redirect('/surveys/thanks');
   });
