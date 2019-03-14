@@ -8,6 +8,11 @@ class SurveyList extends Component {
   }
 
   renderSurveys() {
+    if (!this.props.surveys) {
+      return null;
+    } else if (this.props.surveys.length === 0) {
+      return <h5>Start creating a new survey by clicking on the + button below.</h5>
+    }
     return this.props.surveys.map((survey, index) => {
       return (
         <div className="card darken-1" key={index}>
