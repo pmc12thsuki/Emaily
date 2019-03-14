@@ -27,7 +27,7 @@ class SurveyList extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ margin: "20px 0 0 0" }}>
         { this.renderSurveys() }
       </div>
     )

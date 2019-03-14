@@ -13,7 +13,7 @@ class SurveyForm extends Component {
         {/* this.props.handleSubmit 是一個 reduxForm 加在這個 component 上的 function，可以在我們 submit form 時把填寫的 value 都抓出來 */}
         <form onSubmit={this.props.handleSubmit(() => this.props.onSurveySubmit())}>
           {this.renderFields()}
-          <Link to='/surveys' className="red btn-flat white-text"> Cancel </Link>
+          <Link to='/surveys' className="red  darken-1 btn-flat white-text"> Cancel </Link>
           <button className="teal btn-flat right white-text" type="submit"> Next <i className="material-icons right">arrow_forward</i> </button>
         </form>
       </div>

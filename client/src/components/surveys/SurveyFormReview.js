@@ -8,7 +8,7 @@ const SurveyFormReview = (props) => {
   const { onCancel, formValues, submitSurvey, history } = props;
   const reviewFields = formFields.map((field, index) => {
     return (
-      <div key={index}>
+      <div key={index} style={{margin:'20px 0'}}>
         <label>{field.label}</label>
         <div>{formValues[field.name]}</div>
       </div>
@@ -18,10 +18,10 @@ const SurveyFormReview = (props) => {
     <div>
       <h5>Please confirm your entries</h5>
       {reviewFields}
-      <button className='yellow darken-3 white-text btn-flat' style={{ margin:'20px 0' }} onClick={() => onCancel()}>
+      <button className='red  darken-1 btn-flat white-text' style={{ margin:'20px 0' }} onClick={() => onCancel()}>
         Back <i className="material-icons right">arrow_back</i>   
       </button>
-      <button className='green white-text btn-flat right' style={{ margin:'20px 0' }} 
+      <button className='teal btn-flat right white-text' style={{ margin:'20px 0' }} 
               onClick={() => submitSurvey(formValues, history) } > 
               {/* 把 history 也傳給 action creator，這樣才能在 action 完成之後 redirect 頁面 */}
         Send Survey <i className="material-icons right">email</i>   
