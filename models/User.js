@@ -7,7 +7,7 @@ const { Schema } = mongoose;
 // 定義該 collection 的 schema
 const userSchema = new Schema({
   googleId: String,
-  credits: { type: Number, default: 0 },
+  credits: { type: Number, default: 5 },
 });
 
 // 實際創造該 collection
